@@ -1,5 +1,6 @@
 package com.forum.domain;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,32 +60,25 @@ public class User extends BaseDomain {
 	@Column(name="user_type",columnDefinition="int not null default 1")
 	private int userType=NORMAL_USER;
 	
-	
-	/**
-	 *  用户所有的登录日志。
-	 */
-	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="user")
-	private Set<LoginLog> longinLogs=new HashSet<>();
-	
 	@Column(name="password",nullable=false)
 	private String password;
 	
 	@Column(name="locked",columnDefinition="int not null default 0")
 	private int locked=USER_UNLOCK;
 	
+    @Column(name = "last_ip")
+	private String lastIp;
+    
 	@Column(name="credit",columnDefinition="int default 0")
 	private int credit;
+	
+	@Column(name = "last_visit")
+	private Date lastVisit;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
 	@JoinTable(name="t_board_manager",joinColumns={@JoinColumn(name="user_id")}, 
 		inverseJoinColumns={@JoinColumn(name="board_id")} )
 	private Set<Board> manBoards=new HashSet<Board>();
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="user")
-	private Set<Topic> topics=new HashSet<>();
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="user")
-	private Set<Post> posts=new HashSet<>();
 
 	public int getUserId() {
 		return userId;
@@ -108,14 +102,6 @@ public class User extends BaseDomain {
 
 	public void setUserType(int userType) {
 		this.userType = userType;
-	}
-
-	public Set<LoginLog> getLonginLogs() {
-		return longinLogs;
-	}
-
-	public void setLonginLogs(Set<LoginLog> longinLogs) {
-		this.longinLogs = longinLogs;
 	}
 
 	public String getPassword() {
@@ -150,19 +136,19 @@ public class User extends BaseDomain {
 		this.manBoards = manBoards;
 	}
 
-	public Set<Topic> getTopics() {
-		return topics;
+	public String getLastIp() {
+		return lastIp;
 	}
 
-	public void setTopics(Set<Topic> topics) {
-		this.topics = topics;
+	public void setLastIp(String lastIp) {
+		this.lastIp = lastIp;
 	}
 
-	public Set<Post> getPosts() {
-		return posts;
+	public Date getLastVisit() {
+		return lastVisit;
 	}
 
-	public void setPosts(Set<Post> posts) {
-		this.posts = posts;
+	public void setLastVisit(Date lastVisit) {
+		this.lastVisit = lastVisit;
 	}
 }

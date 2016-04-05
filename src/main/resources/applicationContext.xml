@@ -9,7 +9,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<context:component-scan base-package="com.forum.dao"></context:component-scan>
-
+	<context:component-scan base-package="com.forum.service"></context:component-scan>
+	<tx:annotation-driven/>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close" p:driverClassName="com.mysql.jdbc.Driver"
@@ -29,7 +30,7 @@
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.cache.use_second_level_cache">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.connection.autocommit">true</prop>
 				<prop key="current_session_context_class">thread</prop>
@@ -47,12 +48,12 @@
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="save" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut expression="within(com.forum.dao.*)" id="daoMethod" />
+		<aop:pointcut expression="within(com.forum.service.*)" id="daoMethod" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoMethod" />
 	</aop:config>
 </beans>

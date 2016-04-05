@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.forum.domain.Board;
 
@@ -20,9 +21,9 @@ public class BoardTest {
 	@Test
 	public void test() {
 		Board b=new Board();
-		b.setBoardName("亚洲无码123");
-		b.setBoardDesc("亚洲无码片板块");
-		b.setTopicNum(0);
+		b.setBoardDesc("asdf");
+		b.setBoardName("亚洲无码");
+		//b.setTopicNum(0);
 		boardDao.save(b);
 		//System.out.println(boardDao.get(1));
 		assert true;

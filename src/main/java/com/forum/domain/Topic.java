@@ -35,7 +35,7 @@ public class Topic extends BaseDomain {
 	private int topicId;
 	
 	@Column(name="topic_title",nullable=false)
-	private int topicTitle;
+	private String topicTitle;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id",nullable=false)
@@ -69,11 +69,11 @@ public class Topic extends BaseDomain {
 		this.topicId = topicId;
 	}
 
-	public int getTopicTitle() {
+	public String getTopicTitle() {
 		return topicTitle;
 	}
 
-	public void setTopicTitle(int topicTitle) {
+	public void setTopicTitle(String topicTitle) {
 		this.topicTitle = topicTitle;
 	}
 
