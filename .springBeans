@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/webapp/WEB-INF/forum-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/sb-servlet.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
